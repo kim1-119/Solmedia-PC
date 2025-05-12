@@ -1,88 +1,347 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI MAM / Adobe 세미나 초대장</title>
-  <style>
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
-    .container {
-      max-width: 720px;
-      margin: auto;
-      background: #fff;
-      padding: 40px 30px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      font-size: 28px;
-      color: #222;
-      margin-bottom: 10px;
-    }
-    .date, .location, .target {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-    .desc {
-      margin-top: 30px;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 24px;
-      background: #0072ce;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-      margin-top: 20px;
-    }
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 14px;
-      color: #888;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MAM / Adobe 세미나</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5055FF;
+            --primary-dark: #3f44cc;
+            --dark: #111827;
+            --light-text: #6B7280;
+            --light-bg: #F9FAFB;
+            --accent: #FBBF24;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #5055FF 0%, #6674FF 100%);
+            color: white;
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBkPSJNMCAwaDEyMHYyMDBIMHoiLz48cGF0aCBkPSJNMCA0MDB2LTEzLjFsMTIwLTEzLjJ2NDAuNGwtMTIwLTEzLjlWNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PHBhdGggZD0iTTAgNDAwdi0yMDBsMTIwIDQwLjR2MTIzLjJMMCA0MDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIi8+PHBhdGggZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgZD0iTTEyMCAwaDEyMHYyMDBIMTIweiIvPjxwYXRoIGQ9Ik0xMjAgNDAwdi0xMy4xbDEyMC0xMy4ydjQwLjRsLTEyMC0xMy45VjQwMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjxwYXRoIGQ9Ik0xMjAgNDAwdi0yMDBsMTIwIDQwLjR2MTIzLjJMMTIwIDQwMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMikiLz48cGF0aCBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBkPSJNMjQwIDBoMTIwdjIwMEgyNDB6Ii8+PHBhdGggZD0iTTI0MCA0MDB2LTEzLjFsMTIwLTEzLjJ2NDAuNGwtMTIwLTEzLjlWNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PHBhdGggZD0iTTI0MCA0MDB2LTIwMGwxMjAgNDAuNHYxMjMuMkwyNDAgNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjxwYXRoIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIGQ9Ik0zNjAgMGgxMjB2MjAwSDM2MHoiLz48cGF0aCBkPSJNMzYwIDQwMHYtMTMuMWwxMjAtMTMuMnY0MC40bC0xMjAtMTMuOVY0MDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz48cGF0aCBkPSJNMzYwIDQwMHYtMjAwbDEyMCA0MC40djEyMy4yTDM2MCA0MDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIi8+PHBhdGggZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgZD0iTTQ4MCAwaDEyMHYyMDBINDgweiIvPjxwYXRoIGQ9Ik00ODAgNDAwdi0xMy4xbDEyMC0xMy4ydjQwLjRsLTEyMC0xMy45VjQwMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjxwYXRoIGQ9Ik00ODAgNDAwdi0yMDBsMTIwIDQwLjR2MTIzLjJMNDgwIDQwMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMikiLz48cGF0aCBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBkPSJNNjAwIDBoMTIwdjIwMEg2MDB6Ii8+PHBhdGggZD0iTTYwMCA0MDB2LTEzLjFsMTIwLTEzLjJ2NDAuNGwtMTIwLTEzLjlWNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PHBhdGggZD0iTTYwMCA0MDB2LTIwMGwxMjAgNDAuNHYxMjMuMkw2MDAgNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjxwYXRoIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIGQ9Ik03MjAgMGgxMjB2MjAwSDcyMHoiLz48cGF0aCBkPSJNNzIwIDQwMHYtMTMuMWwxMjAtMTMuMnY0MC40bC0xMjAtMTMuOVY0MDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz48cGF0aCBkPSJNNzIwIDQwMHYtMjAwbDEyMCA0MC40djEyMy4yTDcyMCA0MDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIi8+PHBhdGggZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgZD0iTTg0MCAwaDEyMHYyMDBIODQweiIvPjxwYXRoIGQ9Ik04NDAgNDAwdi0xMy4xbDEyMC0xMy4ydjQwLjRsLTEyMC0xMy45VjQwMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjxwYXRoIGQ9Ik04NDAgNDAwdi0yMDBsMTIwIDQwLjR2MTIzLjJMODQwIDQwMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMikiLz48cGF0aCBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBkPSJNOTYwIDBoMTIwdjIwMEg5NjB6Ii8+PHBhdGggZD0iTTk2MCA0MDB2LTEzLjFsMTIwLTEzLjJ2NDAuNGwtMTIwLTEzLjlWNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PHBhdGggZD0iTTk2MCA0MDB2LTIwMGwxMjAgNDAuNHYxMjMuMkw5NjAgNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjxwYXRoIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIGQ9Ik0xMDgwIDBoMTIwdjIwMGgtMTIweiIvPjxwYXRoIGQ9Ik0xMDgwIDQwMHYtMTMuMWwxMjAtMTMuMnY0MC40bC0xMjAtMTMuOVY0MDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz48cGF0aCBkPSJNMTA4MCA0MDB2LTIwMGwxMjAgNDAuNHYxMjMuMkwxMDgwIDQwMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMikiLz48cGF0aCBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBkPSJNMTIwMCAwaDEyMHYyMDBoLTEyMHoiLz48cGF0aCBkPSJNMTIwMCA0MDB2LTEzLjFsMTIwLTEzLjJ2NDAuNGwtMTIwLTEzLjlWNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PHBhdGggZD0iTTEyMDAgNDAwdi0yMDBsMTIwIDQwLjR2MTIzLjJMMTIwMCA0MDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIi8+PHBhdGggZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgZD0iTTEzMjAgMGgxMjB2MjAwaC0xMjB6Ii8+PHBhdGggZD0iTTEzMjAgNDAwdi0xMy4xbDEyMC0xMy4ydjQwLjRsLTEyMC0xMy45VjQwMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjxwYXRoIGQ9Ik0xMzIwIDQwMHYtMjAwbDEyMCA0MC40djEyMy4yTDEzMjAgNDAweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvZz48L3N2Zz4=');
+            background-size: cover;
+            opacity: 0.4;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+        }
+        
+        .main-content {
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+            padding-bottom: 80px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .card-header {
+            padding: 24px 30px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .section-title {
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+        
+        p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        
+        .event-info {
+            background-color: #F3F4F6;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .event-info-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .event-info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .event-info-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .event-info-label {
+            font-weight: 600;
+            width: 80px;
+            color: var(--dark);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .note-box {
+            background-color: #F5F3FF;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+        
+        .note-box p {
+            margin-bottom: 10px;
+            color: #4B5563;
+        }
+        
+        .note-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        footer {
+            background-color: #1F2937;
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .event-info-item {
+                flex-direction: column;
+            }
+            
+            .event-info-label {
+                margin-bottom: 5px;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>AI MAM / Adobe 세미나 초대장</h1>
-    <div class="date">📅 일시: 2025년 5월 21일(수) ~ 22일(목)</div>
-    <div class="location">📍 장소: 서울 COEX Hall D / KOBA 전시장 내 부스</div>
-    <div class="target">👥 초청 대상: 고객 및 협력사</div>
-
-    <div class="desc">
-      행사 설명은 추후 업데이트될 예정입니다.<br/>
-      Adobe 솔루션 및 AI 기반 MAM 시스템을 직접 체험할 수 있는 자리입니다.
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="badge">2025.05.21~22</div>
+                <h1>AI MAM / Adobe 세미나</h1>
+                <p class="subtitle">최신 AI 기술과 Adobe 솔루션을 만나보세요</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container main-content">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="section-title">세미나 안내</h2>
+            </div>
+            <div class="card-body">
+                <p>AI MAM / Adobe 세미나에 여러분을 초대합니다. 이번 세미나에서는 최신 AI 기술과 Adobe 솔루션에 대한 유익한 정보를 제공해 드립니다.</p>
+                
+                <div class="event-info">
+                    <div class="event-info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="event-info-label">행사명:</div>
+                        <div>AI MAM / Adobe 세미나</div>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="event-info-label">날짜:</div>
+                        <div>2025년 5월 21일 ~ 22일</div>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="event-info-label">장소:</div>
+                        <div>추후 공지</div>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-users"></i>
+                        <div class="event-info-label">대상:</div>
+                        <div>고객 및 협력사</div>
+                    </div>
+                </div>
+                
+                <p>AI와 디지털 미디어 관리(MAM) 분야의 최신 트렌드와 Adobe의 혁신적인 솔루션을 직접 경험해 보세요. 전문가들의 강연과 실습을 통해 비즈니스에 적용할 수 있는 실질적인 인사이트를 얻을 수 있습니다.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="section-title">프로그램 소개</h2>
+            </div>
+            <div class="card-body">
+                <p>이번 세미나에서는 AI 기술을 활용한 미디어 자산 관리(MAM)와 Adobe 솔루션에 대한 다양한 세션이 진행됩니다. 자세한 프로그램 일정은 추후 공개될 예정입니다.</p>
+                
+                <div class="note-box">
+                    <p>※ 행사 세부 내용은 추후 업데이트될 예정입니다.</p>
+                </div>
+                
+                <div style="text-align: center; padding: 30px 0;">
+                    <img src="/api/placeholder/600/300" alt="세미나 이미지" style="max-width: 100%; border-radius: 12px; box-shadow: var(--card-shadow);">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="section-title">참가 안내</h2>
+            </div>
+            <div class="card-body">
+                <p>AI MAM / Adobe 세미나 참가를 원하시는 분들은 아래 참가 신청 버튼을 통해 등록해 주시기 바랍니다. 참가비는 무료이며, 사전 등록이 필요합니다.</p>
+                
+                <div class="note-box">
+                    <p>※ 가급적 대중교통을 이용해 주시기 바랍니다.</p>
+                    <p>※ 문의 사항은 솔미디어 컴퍼니로 연락해 주시기 바랍니다.</p>
+                    <p>※ 문의처: <strong>shkim@solmedia.co.kr</strong> 김상현 팀장 (<strong>010-2352-3355</strong>)</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="https://docs.google.com/forms/d/18Oh597Rvvb6MLgkObyN38ePyx7MHmLoeksrKSl0_iWw/edit?usp=forms_home&ths=true" class="btn" target="_blank">참가 신청하기</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <a class="btn" href="https://docs.google.com/forms/d/18Oh597Rvvb6MLgkObyN38ePyx7MHmLoeksrKSl0_iWw/edit" target="_blank">
-      참가 신청하기
-    </a>
-
-    <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.4200427863587!2d127.05637741530916!3d37.5112677798064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca5bcf1e7c169%3A0x83ae30e135d86e99!2sCOEX%20Hall%20D!5e0!3m2!1sko!2skr!4v1652345678901"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-
+    
     <footer>
-      주최: [회사명 입력] | 문의: contact@example.com
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">&copy; 2025 솔미디어 컴퍼니. 모든 권리 보유.</div>
+                <div>
+                    <a href="#" style="color: white; margin: 0 10px; text-decoration: none;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: white; margin: 0 10px; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: white; margin: 0 10px; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
     </footer>
-  </div>
 </body>
 </html>
