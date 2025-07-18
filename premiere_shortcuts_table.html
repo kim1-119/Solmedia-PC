@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프리미어 프로 단축키 표</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3d4f63 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 1200px;
+            max-width: 95vw;
+            background: #34495e;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ecf0f1;
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .os-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .os-button {
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .os-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .os-button.active {
+            box-shadow: 0 4px 15px rgba(0,0,0, 0.4);
+        }
+
+        .os-button.windows:hover {
+            background: #5d7cfa;
+        }
+
+        .os-button.windows.active {
+            background: #4a6cf7;
+            box-shadow: 0 4px 15px rgba(74, 108, 247, 0.4);
+        }
+
+        .os-button.mac {
+            background: #e74c3c;
+        }
+
+        .os-button.mac:hover {
+            background: #f55a4e;
+        }
+
+        .os-button.mac.active {
+            background: #e74c3c;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .table-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .table-section {
+            background: #2c3e50;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .section-header {
+            background: #1a252f;
+            color: #ecf0f1;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #34495e;
+        }
+
+        .category-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 16px;
+            color: white;
+            vertical-align: middle;
+        }
+
+        .icon-basic { background: #4a6cf7; }
+        .icon-timeline { background: #9b59b6; }
+        .icon-audio { background: #f39c12; }
+        .icon-effects { background: #27ae60; }
+
+        .shortcut-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #34495e;
+            transition: background 0.3s ease;
+        }
+
+        .shortcut-row:hover {
+            background: #3d4f63;
+        }
+
+        .shortcut-row:last-child {
+            border-bottom: none;
+        }
+
+        .function-name {
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .description {
+            color: #bdc3c7;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .shortcut-keys {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+        }
+
+        .shortcut-key {
+            background: #4a6cf7;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-weight: 600;
+            font-size: 11px;
+            display: inline-block;
+            margin: 1px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .shortcut-key.mac {
+            background: #e74c3c;
+        }
+
+        .os-label {
+            font-size: 10px;
+            color: #95a5a6;
+            margin-bottom: 2px;
+        }
+
+        .key-combination {
+            white-space: nowrap;
+        }
+
+        .shortcut-content {
+            flex: 1;
+            margin-right: 15px;
+        }
+
+        .special-note {
+            background: #2c3e50;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note-text {
+            color: #ecf0f1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .note-title {
+            color: #f39c12;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Adobe Premiere Pro 편집 단축키</h1>
+        
+        <div class="os-toggle">
+            <button class="os-button windows active" onclick="showOS('windows', this)">Windows</button>
+            <button class="os-button mac" onclick="showOS('mac', this)">Mac</button>
+        </div>
+        
+        <div class="table-container">
+            <div class="table-section">
+                <div class="section-header">
+                    <span class="category-icon icon-basic">📁</span>
+                    기본 편집 단축키
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">새 시퀀스 만들기</div>
+                        <div class="description">새로운 시퀀스 생성</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">N</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">N</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">가져오기 (Import)</div>
+                        <div class="description">미디어 파일 가져오기</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">I</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">I</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">내보내기 (Export)</div>
+                        <div class="description">미디어 내보내기</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">M</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">M</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">저장</div>
+                        <div class="description">프로젝트 저장</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">S</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">S</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">실행 취소</div>
+                        <div class="description">마지막 작업 실행취소</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">Z</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">Z</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">다시 실행 (Redo)</div>
+                        <div class="description">실행취소한 작업 다시실행</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">Shift</span><span class="shortcut-key">Z</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">⇧</span><span class="shortcut-key mac">Z</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">복사/붙여넣기</div>
+                        <div class="description">클립 복사 후 붙여넣기</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">C</span> / <span class="shortcut-key">Ctrl</span><span class="shortcut-key">V</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">C</span> / <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">V</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">모두 선택</div>
+                        <div class="description">타임라인 전체 선택</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">A</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">A</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-section">
+                <div class="section-header">
+                    <span class="category-icon icon-timeline">✂️</span>
+                    타임라인 및 클립 편집
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">재생/정지 (토글)</div>
+                        <div class="description">타임라인 재생 및 정지</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">Space</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">인 포인트 설정</div>
+                        <div class="description">현재 위치에 인점 마크</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">I</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">아웃 포인트 설정</div>
+                        <div class="description">현재 위치에 아웃점 마크</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">O</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">인/아웃 포인트 제거</div>
+                        <div class="description">설정된 인아웃점 제거</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">Shift</span><span class="shortcut-key">X</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌥</span><span class="shortcut-key mac">X</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">레이저 툴 (자르기)</div>
+                        <div class="description">클립 자르기 도구</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">C</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">Add Edit (컷)</div>
+                        <div class="description">현재 위치에서 모든 트랙 컷</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">K</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">K</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">선택 툴</div>
+                        <div class="description">기본 선택 도구</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">V</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">트랙 선택 툴</div>
+                        <div class="description">트랙 선택 도구 (앞쪽)</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">A</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">이동 툴 (슬립)</div>
+                        <div class="description">클립 슬립 도구</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">Y</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">삭제</div>
+                        <div class="description">선택한 클립 삭제</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">Delete</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">리플 삭제</div>
+                        <div class="description">삭제 후 공간 제거</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">Shift</span><span class="shortcut-key">Delete</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">매치 프레임</div>
+                        <div class="description">소스 모니터와 프로그램 모니터 매치</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">F</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">리버스 매치 프레임</div>
+                        <div class="description">프로그램 모니터에서 소스 모니터로 매치</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">Shift</span><span class="shortcut-key">R</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="table-container" style="margin-top: 20px;">
+            <div class="table-section">
+                <div class="section-header">
+                    <span class="category-icon icon-audio">🎵</span>
+                    오디오 및 마커
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">오디오 레벨 높이기</div>
+                        <div class="description">선택한 클립 오디오 레벨 증가</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">↑</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">↑</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">오디오 레벨 낮추기</div>
+                        <div class="description">선택한 클립 오디오 레벨 감소</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">↓</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">↓</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">마커 추가</div>
+                        <div class="description">현재 위치에 마커 추가</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">M</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">마커 이동</div>
+                        <div class="description">마커 간 이동</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">Shift</span><span class="shortcut-key">M</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">마커 삭제</div>
+                        <div class="description">선택한 마커 삭제</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">Alt</span><span class="shortcut-key">M</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌥</span><span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">M</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">J-K-L 재생</div>
+                        <div class="description">역재생-정지-재생 (속도 조절)</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">J</span><span class="shortcut-key">K</span><span class="shortcut-key">L</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-section">
+                <div class="section-header">
+                    <span class="category-icon icon-effects">🧩</span>
+                    효과 및 네비게이션
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">기본 전환 적용 (비디오)</div>
+                        <div class="description">비디오 클립에 기본 전환 적용</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">D</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">D</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">기본 전환 적용 (오디오)</div>
+                        <div class="description">오디오 클립에 기본 전환 적용</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination windows-only">
+                            <div class="os-label">Windows</div>
+                            <span class="shortcut-key">Ctrl</span><span class="shortcut-key">Shift</span><span class="shortcut-key">D</span>
+                        </div>
+                        <div class="key-combination mac-only">
+                            <div class="os-label">Mac</div>
+                            <span class="shortcut-key mac">⌘</span><span class="shortcut-key mac">⇧</span><span class="shortcut-key mac">D</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">시작 지점으로 이동</div>
+                        <div class="description">재생헤드를 시작점으로 이동</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">Home</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">끝 지점으로 이동</div>
+                        <div class="description">재생헤드를 끝점으로 이동</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">End</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">프레임 이동</div>
+                        <div class="description">프레임 단위로 앞뒤 이동</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">←</span> / <span class="shortcut-key">→</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">다음/이전 컷으로 이동</div>
+                        <div class="description">편집점 간 이동</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">↑</span> / <span class="shortcut-key">↓</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-row">
+                    <div class="shortcut-content">
+                        <div class="function-name">타임라인 확대/축소</div>
+                        <div class="description">타임라인 시간축 확대/축소</div>
+                    </div>
+                    <div class="shortcut-keys">
+                        <div class="key-combination">
+                            <span class="shortcut-key">+</span> / <span class="shortcut-key">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showOS(os, element) {
+            const buttons = document.querySelectorAll('.os-button');
+            const windowsElements = document.querySelectorAll('.windows-only');
+            const macElements = document.querySelectorAll('.mac-only');
+            
+            // 버튼 활성화 상태 변경
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            } else {
+                // 초기 로드 시 해당 OS 버튼 활성화
+                const targetButton = document.querySelector(`.os-button.${os}`);
+                if (targetButton) {
+                    targetButton.classList.add('active');
+                }
+            }
+            
+            // 요소 표시/숨김 처리
+            if (os === 'windows') {
+                windowsElements.forEach(el => el.style.display = 'block');
+                macElements.forEach(el => el.style.display = 'none');
+            } else if (os === 'mac') {
+                windowsElements.forEach(el => el.style.display = 'none');
+                macElements.forEach(el => el.style.display = 'block');
+            }
+        }
+
+        // 초기 로드 시 Windows 버튼 활성화
+        document.addEventListener('DOMContentLoaded', function() {
+            showOS('windows');
+        });
+    </script>
+</body>
+</html>
