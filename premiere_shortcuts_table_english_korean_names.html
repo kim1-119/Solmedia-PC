@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adobe Premiere Pro Keyboard Shortcuts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .search-box {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            width: 300px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: #3498db;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .filter-btn:hover {
+            background: #2980b9;
+        }
+
+        .filter-btn.active {
+            background: #2c3e50;
+        }
+
+        .print-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #27ae60;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .print-btn:hover {
+            background: #229954;
+        }
+
+        .shortcuts-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .function-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .korean-name {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .shortcut-keys {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #e74c3c;
+            background: #fdf2f2;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .description {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media print {
+            .controls, .print-btn {
+                display: none;
+            }
+            
+            body {
+                background: white;
+            }
+            
+            .shortcuts-table {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            td, th {
+                padding: 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🖨️ Print</h1>
+            <p>Adobe Premiere Pro Keyboard Shortcuts Reference</p>
+        </div>
+
+        <div class="controls">
+            <input type="text" class="search-box" placeholder="Search shortcuts..." id="searchInput">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="file">File & Edit</button>
+            <button class="filter-btn" data-category="sequence">Sequence Edit</button>
+            <button class="filter-btn" data-category="clip">Clip Edit</button>
+            <button class="filter-btn" data-category="marker">Markers & Points</button>
+            <button class="filter-btn" data-category="playback">Playback & Navigation</button>
+            <button class="filter-btn" data-category="panel">Panels & Tools</button>
+            <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+        </div>
+
+        <div class="shortcuts-table">
+            <div class="category-header">📁 File & Edit</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Windows</th>
+                        <th>Mac</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="file">
+                        <td>
+                            <div class="function-name">New Sequence</div>
+                            <div class="korean-name">새 시퀀스</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+N</span></td>
+                        <td><span class="shortcut-keys">⌘+N</span></td>
+                        <td>새로운 시퀀스 생성</td>
+                    </tr>
+                    <tr data-category="file">
+                        <td>
+                            <div class="function-name">Import Media</div>
+                            <div class="korean-name">미디어 가져오기</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+I</span></td>
+                        <td><span class="shortcut-keys">⌘+I</span></td>
+                        <td>미디어 파일 가져오기</td>
+                    </tr>
+                    <tr data-category="file">
+                        <td>
+                            <div class="function-name">Export</div>
+                            <div class="korean-name">내보내기</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+M</span></td>
+                        <td><span class="shortcut-keys">⌘+M</span></td>
+                        <td>비디오 렌더링 및 내보내기</td>
+                    </tr>
+                    <tr data-category="file">
+                        <td>
+                            <div class="function-name">Save</div>
+                            <div class="korean-name">저장</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+S</span></td>
+                        <td><span class="shortcut-keys">⌘+S</span></td>
+                        <td>프로젝트 저장</td>
+                    </tr>
+                    <tr data-category="file">
+                        <td>
+                            <div class="function-name">Undo</div>
+                            <div class="korean-name">실행 취소</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+Z</span></td>
+                        <td><span class="shortcut-keys">⌘+Z</span></td>
+                        <td>마지막 작업 실행취소</td>
+                    </tr>
+                    <tr data-category="file">
+                        <td>
+                            <div class="function-name">Redo</div>
+                            <div class="korean-name">다시 실행</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+Shift+Z</span></td>
+                        <td><span class="shortcut-keys">⌘+Shift+Z</span></td>
+                        <td>실행취소한 작업 다시실행</td>
+                    </tr>
+                    <tr data-category="file">
+                        <td>
+                            <div class="function-name">Copy / Paste</div>
+                            <div class="korean-name">복사 / 붙여넣기</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+C / Ctrl+V</span></td>
+                        <td><span class="shortcut-keys">⌘+C / ⌘+V</span></td>
+                        <td>클립 복사 후 붙여넣기</td>
+                    </tr>
+                    <tr data-category="file">
+                        <td>
+                            <div class="function-name">Select All</div>
+                            <div class="korean-name">모두 선택</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+A</span></td>
+                        <td><span class="shortcut-keys">⌘+A</span></td>
+                        <td>타임라인 전체 선택</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="shortcuts-table">
+            <div class="category-header">✂️ Sequence Edit</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Windows</th>
+                        <th>Mac</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="sequence">
+                        <td>
+                            <div class="function-name">Split Clip</div>
+                            <div class="korean-name">클립 분할</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+K</span></td>
+                        <td><span class="shortcut-keys">⌘+K</span></td>
+                        <td>현재 위치에서 모든 트랙 컷</td>
+                    </tr>
+                    <tr data-category="sequence">
+                        <td>
+                            <div class="function-name">Frame Match</div>
+                            <div class="korean-name">프레임 일치</div>
+                        </td>
+                        <td><span class="shortcut-keys">F</span></td>
+                        <td><span class="shortcut-keys">F</span></td>
+                        <td>소스/프로그램 모니터 매치</td>
+                    </tr>
+                    <tr data-category="sequence">
+                        <td>
+                            <div class="function-name">Reverse Frame Match</div>
+                            <div class="korean-name">뒤로 프레임 일치</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+F</span></td>
+                        <td><span class="shortcut-keys">Shift+F</span></td>
+                        <td>리버스 프레임 매치</td>
+                    </tr>
+                    <tr data-category="sequence">
+                        <td>
+                            <div class="function-name">Apply Video Transition</div>
+                            <div class="korean-name">비디오 전환 적용</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+D</span></td>
+                        <td><span class="shortcut-keys">⌘+D</span></td>
+                        <td>비디오 클립에 기본 전환 적용</td>
+                    </tr>
+                    <tr data-category="sequence">
+                        <td>
+                            <div class="function-name">Apply Transition to Selection</div>
+                            <div class="korean-name">선택 영역에 전환 적용</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+Shift+D</span></td>
+                        <td><span class="shortcut-keys">⌘+Shift+D</span></td>
+                        <td>선택된 편집점에 기본 전환 적용</td>
+                    </tr>
+                    <tr data-category="sequence">
+                        <td>
+                            <div class="function-name">Insert</div>
+                            <div class="korean-name">삽입</div>
+                        </td>
+                        <td><span class="shortcut-keys">,</span></td>
+                        <td><span class="shortcut-keys">,</span></td>
+                        <td>현재 위치에 클립 삽입</td>
+                    </tr>
+                    <tr data-category="sequence">
+                        <td>
+                            <div class="function-name">Overwrite</div>
+                            <div class="korean-name">덮어쓰기</div>
+                        </td>
+                        <td><span class="shortcut-keys">.</span></td>
+                        <td><span class="shortcut-keys">.</span></td>
+                        <td>현재 위치에 클립 덮어쓰기</td>
+                    </tr>
+                    <tr data-category="sequence">
+                        <td>
+                            <div class="function-name">Render Work Area</div>
+                            <div class="korean-name">작업 영역 렌더링</div>
+                        </td>
+                        <td><span class="shortcut-keys">Enter</span></td>
+                        <td><span class="shortcut-keys">Enter</span></td>
+                        <td>작업 영역의 효과 렌더링</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="shortcuts-table">
+            <div class="category-header">🎵 Clip Edit</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Windows</th>
+                        <th>Mac</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="clip">
+                        <td>
+                            <div class="function-name">Make Subclip</div>
+                            <div class="korean-name">하위 클립 만들기</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+U</span></td>
+                        <td><span class="shortcut-keys">⌘+U</span></td>
+                        <td>선택한 클립의 하위 클립 생성</td>
+                    </tr>
+                    <tr data-category="clip">
+                        <td>
+                            <div class="function-name">Audio Gain</div>
+                            <div class="korean-name">오디오 게인</div>
+                        </td>
+                        <td><span class="shortcut-keys">G</span></td>
+                        <td><span class="shortcut-keys">G</span></td>
+                        <td>선택한 클립의 오디오 게인 조정</td>
+                    </tr>
+                    <tr data-category="clip">
+                        <td>
+                            <div class="function-name">Audio Channels</div>
+                            <div class="korean-name">오디오 채널</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+Shift+G</span></td>
+                        <td><span class="shortcut-keys">⌘+Shift+G</span></td>
+                        <td>오디오 채널 설정</td>
+                    </tr>
+                    <tr data-category="clip">
+                        <td>
+                            <div class="function-name">Speed/Duration</div>
+                            <div class="korean-name">속도/지속 시간</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+R</span></td>
+                        <td><span class="shortcut-keys">⌘+R</span></td>
+                        <td>클립 속도 및 지속 시간 조정</td>
+                    </tr>
+                    <tr data-category="clip">
+                        <td>
+                            <div class="function-name">Link</div>
+                            <div class="korean-name">연결</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+L</span></td>
+                        <td><span class="shortcut-keys">⌘+L</span></td>
+                        <td>비디오와 오디오 클립 연결</td>
+                    </tr>
+                    <tr data-category="clip">
+                        <td>
+                            <div class="function-name">Group</div>
+                            <div class="korean-name">그룹</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+G</span></td>
+                        <td><span class="shortcut-keys">⌘+G</span></td>
+                        <td>선택한 클립들을 그룹으로 묶기</td>
+                    </tr>
+                    <tr data-category="clip">
+                        <td>
+                            <div class="function-name">Ungroup</div>
+                            <div class="korean-name">그룹 해제</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+Shift+G</span></td>
+                        <td><span class="shortcut-keys">Shift+⌘+G</span></td>
+                        <td>그룹으로 묶인 클립들 해제</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="shortcuts-table">
+            <div class="category-header">📍 Markers & In/Out Points</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Windows</th>
+                        <th>Mac</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Set In Point</div>
+                            <div class="korean-name">인점 설정</div>
+                        </td>
+                        <td><span class="shortcut-keys">I</span></td>
+                        <td><span class="shortcut-keys">I</span></td>
+                        <td>현재 위치에 인점 설정</td>
+                    </tr>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Set Out Point</div>
+                            <div class="korean-name">아웃점 설정</div>
+                        </td>
+                        <td><span class="shortcut-keys">O</span></td>
+                        <td><span class="shortcut-keys">O</span></td>
+                        <td>현재 위치에 아웃점 설정</td>
+                    </tr>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Show Clip</div>
+                            <div class="korean-name">클립 표시</div>
+                        </td>
+                        <td><span class="shortcut-keys">X</span></td>
+                        <td><span class="shortcut-keys">X</span></td>
+                        <td>클립 전체를 인아웃점으로 표시</td>
+                    </tr>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Show Selection</div>
+                            <div class="korean-name">선택 항목 표시</div>
+                        </td>
+                        <td><span class="shortcut-keys">/</span></td>
+                        <td><span class="shortcut-keys">/</span></td>
+                        <td>선택된 클립들을 인아웃점으로 표시</td>
+                    </tr>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Clear In/Out Points</div>
+                            <div class="korean-name">인아웃점 제거</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+Shift+X</span></td>
+                        <td><span class="shortcut-keys">⌥+X</span></td>
+                        <td>인점과 아웃점 모두 제거</td>
+                    </tr>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Add Marker</div>
+                            <div class="korean-name">마커 추가</div>
+                        </td>
+                        <td><span class="shortcut-keys">M</span></td>
+                        <td><span class="shortcut-keys">M</span></td>
+                        <td>현재 위치에 마커 추가</td>
+                    </tr>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Go to Next Marker</div>
+                            <div class="korean-name">다음 마커로 이동</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+M</span></td>
+                        <td><span class="shortcut-keys">Shift+M</span></td>
+                        <td>타임라인의 다음 마커로 이동</td>
+                    </tr>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Go to Previous Marker</div>
+                            <div class="korean-name">이전 마커로 이동</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+Shift+M</span></td>
+                        <td><span class="shortcut-keys">⌘+Shift+M</span></td>
+                        <td>타임라인의 이전 마커로 이동</td>
+                    </tr>
+                    <tr data-category="marker">
+                        <td>
+                            <div class="function-name">Play/Stop</div>
+                            <div class="korean-name">재생/정지</div>
+                        </td>
+                        <td><span class="shortcut-keys">Space</span></td>
+                        <td><span class="shortcut-keys">Space</span></td>
+                        <td>타임라인 재생 및 정지</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="shortcuts-table">
+            <div class="category-header">🔧 Playback & Navigation</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Windows</th>
+                        <th>Mac</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">Reverse Playback</div>
+                            <div class="korean-name">역재생</div>
+                        </td>
+                        <td><span class="shortcut-keys">J</span></td>
+                        <td><span class="shortcut-keys">J</span></td>
+                        <td>왼쪽으로 셔틀</td>
+                    </tr>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">Stop Playback</div>
+                            <div class="korean-name">재생 정지</div>
+                        </td>
+                        <td><span class="shortcut-keys">K</span></td>
+                        <td><span class="shortcut-keys">K</span></td>
+                        <td>셔틀 정지</td>
+                    </tr>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">Forward Playback</div>
+                            <div class="korean-name">정방향 재생</div>
+                        </td>
+                        <td><span class="shortcut-keys">L</span></td>
+                        <td><span class="shortcut-keys">L</span></td>
+                        <td>오른쪽으로 셔틀</td>
+                    </tr>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">Next Frame</div>
+                            <div class="korean-name">다음 프레임</div>
+                        </td>
+                        <td><span class="shortcut-keys">→</span></td>
+                        <td><span class="shortcut-keys">→</span></td>
+                        <td>한 프레임씩 앞으로</td>
+                    </tr>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">Previous Frame</div>
+                            <div class="korean-name">이전 프레임</div>
+                        </td>
+                        <td><span class="shortcut-keys">←</span></td>
+                        <td><span class="shortcut-keys">←</span></td>
+                        <td>한 프레임씩 뒤로</td>
+                    </tr>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">5 Frames Forward</div>
+                            <div class="korean-name">5프레임 앞으로</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+→</span></td>
+                        <td><span class="shortcut-keys">Shift+→</span></td>
+                        <td>5프레임씩 앞으로 이동</td>
+                    </tr>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">5 Frames Backward</div>
+                            <div class="korean-name">5프레임 뒤로</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+←</span></td>
+                        <td><span class="shortcut-keys">Shift+←</span></td>
+                        <td>5프레임씩 뒤로 이동</td>
+                    </tr>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">Next Edit Point</div>
+                            <div class="korean-name">다음 편집점</div>
+                        </td>
+                        <td><span class="shortcut-keys">↑</span></td>
+                        <td><span class="shortcut-keys">↑</span></td>
+                        <td>다음 편집점으로 이동</td>
+                    </tr>
+                    <tr data-category="playback">
+                        <td>
+                            <div class="function-name">Previous Edit Point</div>
+                            <div class="korean-name">이전 편집점</div>
+                        </td>
+                        <td><span class="shortcut-keys">↓</span></td>
+                        <td><span class="shortcut-keys">↓</span></td>
+                        <td>이전 편집점으로 이동</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="shortcuts-table">
+            <div class="category-header">🎛️ Panels & Tools</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Windows</th>
+                        <th>Mac</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="panel">
+                        <td>
+                            <div class="function-name">Project Panel</div>
+                            <div class="korean-name">프로젝트 패널</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+0</span></td>
+                        <td><span class="shortcut-keys">Shift+0</span></td>
+                        <td>프로젝트 패널 활성화</td>
+                    </tr>
+                    <tr data-category="panel">
+                        <td>
+                            <div class="function-name">Source Monitor</div>
+                            <div class="korean-name">소스 모니터</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+1</span></td>
+                        <td><span class="shortcut-keys">Shift+1</span></td>
+                        <td>소스 모니터 활성화</td>
+                    </tr>
+                    <tr data-category="panel">
+                        <td>
+                            <div class="function-name">Program Monitor</div>
+                            <div class="korean-name">프로그램 모니터</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+2</span></td>
+                        <td><span class="shortcut-keys">Shift+2</span></td>
+                        <td>프로그램 모니터 활성화</td>
+                    </tr>
+                    <tr data-category="panel">
+                        <td>
+                            <div class="function-name">Timeline</div>
+                            <div class="korean-name">타임라인</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+3</span></td>
+                        <td><span class="shortcut-keys">Shift+3</span></td>
+                        <td>타임라인 패널 활성화</td>
+                    </tr>
+                    <tr data-category="panel">
+                        <td>
+                            <div class="function-name">Effect Controls</div>
+                            <div class="korean-name">효과 컨트롤</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+4</span></td>
+                        <td><span class="shortcut-keys">Shift+4</span></td>
+                        <td>효과 컨트롤 패널 활성화</td>
+                    </tr>
+                    <tr data-category="panel">
+                        <td>
+                            <div class="function-name">Audio Mixer</div>
+                            <div class="korean-name">오디오 믹서</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+5</span></td>
+                        <td><span class="shortcut-keys">Shift+5</span></td>
+                        <td>오디오 믹서 패널 활성화</td>
+                    </tr>
+                    <tr data-category="panel">
+                        <td>
+                            <div class="function-name">Effects Panel</div>
+                            <div class="korean-name">효과 패널</div>
+                        </td>
+                        <td><span class="shortcut-keys">Shift+7</span></td>
+                        <td><span class="shortcut-keys">Shift+7</span></td>
+                        <td>효과 패널 활성화</td>
+                    </tr>
+                    <tr data-category="panel">
+                        <td>
+                            <div class="function-name">Keyboard Shortcuts</div>
+                            <div class="korean-name">키보드 단축키</div>
+                        </td>
+                        <td><span class="shortcut-keys">Ctrl+Alt+K</span></td>
+                        <td><span class="shortcut-keys">⌘+⌥+K</span></td>
+                        <td>키보드 단축키 설정</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            © Adobe Premiere Pro Keyboard Shortcuts Reference | Manual Reference Material
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter rows
+                const rows = document.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    if (category === 'all' || row.getAttribute('data-category') === category) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
